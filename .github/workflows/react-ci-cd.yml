@@ -3,10 +3,10 @@ name: React Blog Platform CI/CD
 on:
   push:
     branches:
-      - main  # Trigger only on pushes to the main branch
+      - main
   pull_request:
     branches:
-      - main  # Trigger when pull requests are created targeting the main branch
+      - main
 
 jobs:
   build:
@@ -21,23 +21,26 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Change to the Node version you're using
+          node-version: '16'
 
-      # Step 3: Install dependencies
+      # Step 3: Install dependencies in the correct directory
       - name: Install dependencies
         run: npm install
+        working-directory: ./blog-platform  # Add this line to specify the correct directory
 
-      # Step 4: Run tests (optional but recommended)
+      # Step 4: Run tests (optional)
       - name: Run tests
-        run: npm test -- --coverage  # Run tests and check coverage
+        run: npm test -- --coverage
+        working-directory: ./blog-platform  # Add this line to specify the correct directory
 
       # Step 5: Build the app
       - name: Build the app
         run: npm run build
+        working-directory: ./blog-platform  # Add this line to specify the correct directory
 
       # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages  # Specify the branch for deployment (make sure this branch exists in your repo)
-          folder: build     # Folder to deploy after build (this is the output folder)
+          branch: gh-pages
+          folder: build
