@@ -1,0 +1,43 @@
+name: React Blog Platform CI/CD
+
+on:
+  push:
+    branches:
+      - main  # Trigger only on pushes to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger when pull requests are created targeting the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Change to the Node version you're using
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run tests (optional but recommended)
+      - name: Run tests
+        run: npm test -- --coverage  # Run tests and check coverage
+
+      # Step 5: Build the app
+      - name: Build the app
+        run: npm run build
+
+      # Step 6: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages  # Specify the branch for deployment (make sure this branch exists in your repo)
+          folder: build     # Folder to deploy after build (this is the output folder)
