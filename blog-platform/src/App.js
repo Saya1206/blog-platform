@@ -1,46 +1,21 @@
-//import logo from './logo.svg';
-//import './App.css';
-import Post from './components/pages/Post';
-//import About from './components/About';
-import 'bootstrap/dist/css/bootstrap.min.css';
-//import Card from './components/practicePost';
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
 
-
-//import { BrowserRouter, Link } from "react-router-dom";
-//import CreatePost from './components/pages/Post';
-
-// function App() {
-//   return (
-//     <>
-//     <CreatePost/>
-//     </>
-//   );
-// }
-
-// export default App;
-
-
-  function App() {
-    return (
-       <>
-       <Post/>
-</>
-     );
-   }
-  
-   export default App;
-  
-  /* import React from 'react';
-import Card from './Card';*/
-
-/*function App() {
+function App() {
   return (
-    <div className="App">
-      <h1>My Bootstrap Card Example</h1>
-      <Card />
-    </div>
+    <>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
 export default App;
-*/
